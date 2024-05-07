@@ -1,16 +1,16 @@
 import './Game.css';
 import PropTypes from 'prop-types';
 
-const GameHeaderView = (props) =>
-    <>
-        <header className='game-header'>
-            <div className='game-title'>Sliding Image Puzzle</div>
-        </header>
-        <div><h2>{props.gameName}</h2></div>
-    </>;
+const GameHeaderView = () => (
+    <header className="game-header">
+        <div className="game-title">
+            Quedan <b>60</b> segundos
+        </div>
+    </header>
+);
 
 GameHeaderView.propTypes = {
-    gameName: PropTypes.string,
+    gameName: PropTypes.string
 };
 
 export default GameHeaderView;

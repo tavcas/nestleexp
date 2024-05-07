@@ -1,6 +1,5 @@
 import './Game.css';
-import { connect } from 'react-redux'
-import GameStatusView from './GameStatusView';
+import { connect } from 'react-redux';
 import { NumImages } from '../constants';
 import { fetchHighScoreList } from '../reducers/thunks';
 import PuzzleView from './PuzzleView';
@@ -11,11 +10,10 @@ import GameHeaderView from './GameHeaderView';
 import RestartButtonsView from './RestartButtonsView';
 import { initGame } from '../reducers/reducers';
 
-const Game = (props) => {
+const Game = props => {
     return (
-        <div className='game'>
+        <div className="game">
             <GameHeaderView gameName={props.gameName} />
-            <GameStatusView />
             <PuzzleView />
             <RestartButtonsView onInitGame={props.onInitGame} />
             <FullImageView />
@@ -31,27 +29,23 @@ Game.propTypes = {
     gameComplete: PropTypes.bool
 };
 
-
 const mapStateToProps = state => {
     return {
         gameName: state.tileGame.gameName,
         highScoreList: state.tileGame.highScoreList,
         gameComplete: state.tileGame.gameComplete
-    }
-}
+    };
+};
 
 const mapDispatchToProps = dispatch => {
     return {
-        onInitGame: (gameId) => {
+        onInitGame: gameId => {
             dispatch(initGame({ gameId, imageNumber: Math.floor(Math.random() * NumImages) + 1, doShuffling: true }));
             dispatch(fetchHighScoreList);
         }
-    }
-}
+    };
+};
 
-const GameView = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Game)
+const GameView = connect(mapStateToProps, mapDispatchToProps)(Game);
 
 export default GameView;

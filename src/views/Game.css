@@ -1,16 +1,22 @@
 .game {
+  max-width: 5200px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: none;
+  margin-left:25%;
+  flex-grow: initial;
 }
 
 .game-instructions {
   font-style: italic;
-  font-size: 1.0em;
-  width: 300px;
-  height: 50px;
+  font-size: 2em;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
-  overflow-wrap: break-word;
-  white-space: pre-wrap;
+  /* overflow-wrap:unset;
+  white-space: pre-wrap; */
   /* CSS3 */
   white-space: -moz-pre-wrap;
   /* Firefox */
@@ -22,18 +28,20 @@
 
 .game-header {
   background-color: #222;
-  height: 50px;
+  height: 100%;
   padding: 10px;
   color: white;
 }
 
 .game-title {
-  font-size: 1.5em;
+  font-size: 10em
 }
 
 .game-status {
   padding: 20px;
   white-space: pre;
+  font-size: 5em;
+  width: 100%
 }
 
 .game-button {

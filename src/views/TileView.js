@@ -1,11 +1,9 @@
 import './Game.css';
 import PropTypes from 'prop-types';
 
-const TileView = ({ id, size, tileWidth, isCorrectPos, imageNumber, onClick }) =>
-    <div className='tile'
-        style={getStyleForTile(id, size, tileWidth, isCorrectPos, imageNumber)}
-        onClick={() => onClick(id)}
-    />;
+const TileView = ({ id, size, tileWidth, isCorrectPos, imageNumber, onClick }) => (
+    <div className="tile" style={getStyleForTile(id, size, tileWidth, isCorrectPos, imageNumber)} onClick={() => onClick(id)} />
+);
 
 TileView.propTypes = {
     id: PropTypes.number,
@@ -28,14 +26,14 @@ const getStyleForTile = (id: number, size: number, tileWidth: number, isCorrectP
     }
 
     const idx = id - 1;
-    const top = -(Math.floor(idx / size)) * tileWidth;
+    const top = -Math.floor(idx / size) * tileWidth;
     const left = idx < size ? -idx * tileWidth : -(idx % size) * tileWidth;
 
-    const imPath = `${window.location.href}/images/img${imageNumber}.jpg`;
+    const imPath = `${window.location.href}/images/art${imageNumber}.png`;
     let style: any = {
         backgroundPosition: `left ${left}px top ${top}px`,
-        backgroundImage: `url('${imPath}')`,
-    }
+        backgroundImage: `url('${imPath}')`
+    };
 
     if (isCorrectPos) {
         // Use a special style as a hint on that the tile is on
@@ -43,11 +41,11 @@ const getStyleForTile = (id: number, size: number, tileWidth: number, isCorrectP
         style = {
             ...style,
             outline: '1px solid white',
-            outlineOffset: '-10px',
-        }
+            outlineOffset: '-10px'
+        };
     }
 
     return style;
-}
+};
 
 export default TileView;

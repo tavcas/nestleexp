@@ -1,10 +1,4 @@
-import {
-    generateTileSet,
-    swapTilesInSet,
-    allTilesAreAligned,
-    getIndexInHighScoreList,
-    tileIsValidForMovement
-} from './tileset-functions.ts';
+import { generateTileSet, swapTilesInSet, allTilesAreAligned, getIndexInHighScoreList, tileIsValidForMovement } from './tileset-functions.ts';
 import { gameConfigs } from '../game-configs';
 import { v4 as uuidv4 } from 'uuid';
 import { createSlice } from '@reduxjs/toolkit';
@@ -18,7 +12,7 @@ const initialState = {
     imageNumber: 1,
     tiles: [],
     size: undefined,
-    gameId: undefined,
+    gameId: 2,
     gameName: undefined,
     highScoreList: undefined,
     highScorePosition: -1,
@@ -98,6 +92,5 @@ const gameSlice = createSlice({
     }
 });
 
-
-export const { initGame: initGame, moveTile: moveTile, highScoreListLoaded, nameChanged, highScoreListSaved, nameSubmitted } = gameSlice.actions
-export default gameSlice.reducer
+export const { initGame: initGame, moveTile: moveTile, highScoreListLoaded, nameChanged, highScoreListSaved, nameSubmitted } = gameSlice.actions;
+export default gameSlice.reducer;

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import EnterNameView from './EnterNameView';
 import LeaderBoardView from './LeaderBoardView';
 
-const GameStatus = (props) => {
+const GameStatus = props => {
     if (props.gameComplete) {
         return (
             <div className="game-status">
@@ -11,23 +11,18 @@ const GameStatus = (props) => {
                     <b>GAME COMPLETE!</b>
                 </div>
                 <div>You used {props.moves} moves</div>
-                {props.highScorePosition > 0 && !props.highScoreListSaved && (
-                    <EnterNameView />
-                )}
+                {props.highScorePosition > 0 && !props.highScoreListSaved && <EnterNameView />}
                 {props.highScorePosition > 0 && props.highScoreListSaved && (
-                    <LeaderBoardView
-                        highScoreList={props.highScoreList}
-                        userId={props.userId}
-                    />
+                    <LeaderBoardView highScoreList={props.highScoreList} userId={props.userId} />
                 )}
             </div>
         );
     } else {
         return (
             <div className="game-status">
-                Moves: <b>{props.moves}</b>
+                Movimientos: <b>{props.moves}</b>
                 <div className="game-instructions">
-                    <div>Click on the tile that should be moved</div>
+                    <div>Completa el rompecabeza antes de que se acabe el tiempo</div>
                 </div>
             </div>
         );
@@ -40,10 +35,10 @@ GameStatus.propTypes = {
     highScorePosition: PropTypes.number,
     highScoreListSaved: PropTypes.bool,
     highScoreList: PropTypes.object,
-    userId: PropTypes.string,
+    userId: PropTypes.string
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         moves: state.tileGame.moves,
         gameComplete: state.tileGame.gameComplete,
