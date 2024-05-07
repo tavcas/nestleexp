@@ -1,8 +1,8 @@
 {
-    "name": "sliding-image-puzzle",
+    "name": "nestleexp",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://larsbergqvist.github.io/sliding-image-puzzle/",
+    "homepage": "https://nestleexp-tavcas-tavcas-projects.vercel.app/",
     "dependencies": {
         "@reduxjs/toolkit": "^1.8.1",
         "@testing-library/jest-dom": "^5.11.4",
