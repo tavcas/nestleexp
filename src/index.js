@@ -6,8 +6,8 @@ import { fetchHighScoreList } from './reducers/thunks';
 import { initGame } from './reducers/reducers';
 import { Provider } from 'react-redux';
 import { GameId_3x3, NumImages } from './constants';
-import GameView from './views/GameView';
 import { configureStore } from '@reduxjs/toolkit';
+import App from './views/App';
 
 const store = configureStore({
     reducer: {
@@ -22,7 +22,7 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
     <Provider store={store}>
-        <GameView />
+        <App />
     </Provider>
 );
 

@@ -20,7 +20,8 @@ const initialState = {
     userId: undefined,
     highScoreListSaved: false,
     nameSubmitted: false,
-    highScoreListId: -1
+    highScoreListId: -1,
+    step: 'intro'
 };
 
 const emptyTileId = 0;
@@ -88,9 +89,22 @@ const gameSlice = createSlice({
 
         nameSubmitted(state) {
             state.nameSubmitted = true;
+        },
+
+        moveStep(state, action) {
+            state.step = action.payload.step;
+            console.log(state.step);
         }
     }
 });
 
-export const { initGame: initGame, moveTile: moveTile, highScoreListLoaded, nameChanged, highScoreListSaved, nameSubmitted } = gameSlice.actions;
+export const {
+    moveStep: moveStep,
+    initGame: initGame,
+    moveTile: moveTile,
+    highScoreListLoaded,
+    nameChanged,
+    highScoreListSaved,
+    nameSubmitted
+} = gameSlice.actions;
 export default gameSlice.reducer;

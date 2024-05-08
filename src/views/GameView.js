@@ -3,21 +3,23 @@ import { connect } from 'react-redux';
 import { NumImages } from '../constants';
 import { fetchHighScoreList } from '../reducers/thunks';
 import PuzzleView from './PuzzleView';
-import FullImageView from './FullImageView';
 import PropTypes from 'prop-types';
-import LeaderBoardView from './LeaderBoardView';
+// import LeaderBoardView from './LeaderBoardView';
 import GameHeaderView from './GameHeaderView';
-import RestartButtonsView from './RestartButtonsView';
-import { initGame } from '../reducers/reducers';
+// import RestartButtonsView from './RestartButtonsView';
+import { initGame, moveStep } from '../reducers/reducers';
+import { useEffect } from 'react';
 
-const Game = props => {
+const Game = ({ gameName, gameComplete, moveStep }) => {
+    useEffect(() => {
+        if (gameComplete) {
+            moveStep('win');
+        }
+    }, [gameComplete]);
     return (
         <div className="game">
-            <GameHeaderView gameName={props.gameName} />
             <PuzzleView />
-            <RestartButtonsView onInitGame={props.onInitGame} />
-            <FullImageView />
-            {!props.gameComplete && <LeaderBoardView highScoreList={props.highScoreList} />}
+            <GameHeaderView key="full" gameName={gameName} />
         </div>
     );
 };
@@ -26,7 +28,8 @@ Game.propTypes = {
     gameName: PropTypes.string,
     highScoreList: PropTypes.object,
     onInitGame: PropTypes.func,
-    gameComplete: PropTypes.bool
+    gameComplete: PropTypes.bool,
+    moveStep: PropTypes.func
 };
 
 const mapStateToProps = state => {
@@ -40,8 +43,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onInitGame: gameId => {
-            dispatch(initGame({ gameId, imageNumber: Math.floor(Math.random() * NumImages) + 1, doShuffling: true }));
+            dispatch(initGame({ gameId, imageNumber: Math.floor(Math.random() * NumImages) + 1, doShuffling: false }));
             dispatch(fetchHighScoreList);
+        },
+
+        moveStep: step => {
+            dispatch(moveStep({ step }));
         }
     };
 };

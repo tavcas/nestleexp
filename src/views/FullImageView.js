@@ -1,28 +1,43 @@
 import { connect } from 'react-redux';
-// import { PuzzleWidth } from '../constants';
+import { PuzzleWidth } from '../constants';
 import PropTypes from 'prop-types';
+import Countdown from 'react-countdown';
+import { moveStep } from '../reducers/reducers';
 
-const FullImage = props => {
-    const imPath = `${window.location.href}/images/art${props.imageNumber}.png`;
-    // const tileWidth = PuzzleWidth / props.size;
-    // const fullImageWidth = props.size * tileWidth;
-    let fullImageStyle = {
-        // width: fullImageWidth + 'px',
-        // height: fullImageWidth + 'px'
-        width: '100%',
-        height: '100%'
+const FullImage = ({ imageNumber, size, moveStep }) => {
+    const timeout = 5000;
+    const renderer = ({ minutes, seconds }) => minutes * 60 + seconds;
+    const imPath = `${window.location.href}/images/art${imageNumber}.png`;
+    const tileWidth = PuzzleWidth / size;
+    const tileWrapperStyle = {
+        width: `${size * tileWidth}px`
+    };
+    const tileContainerStyle = {
+        gridTemplateColumns: `repeat(${size},${tileWidth}px)`
     };
 
     return (
-        <div className="full-image" style={fullImageStyle}>
-            <img src={`${imPath}`} draggable="false" alt="Full image" />
+        <div className="game">
+            <div className="tile-wrapper" style={tileWrapperStyle}>
+                <div className="tile-container" style={tileContainerStyle}>
+                    <img src={`${imPath}`} draggable="false" alt="Full image" />
+                </div>
+            </div>
+            <div className="game-title">
+                <h3>
+                    <Countdown renderer={renderer} autoStart={true} onComplete={() => moveStep('game')} date={Date.now() + timeout} />
+                </h3>
+                <p>Conoces la lata?</p>
+                <sub>Completa el rompecabezaantes de que se acabe el tiempo!</sub>
+            </div>
         </div>
     );
 };
 
 FullImage.propTypes = {
     size: PropTypes.number,
-    imageNumber: PropTypes.number
+    imageNumber: PropTypes.number,
+    moveStep: PropTypes.func
 };
 
 const mapStateToProps = state => {
@@ -31,6 +46,14 @@ const mapStateToProps = state => {
     };
 };
 
-const FullImageView = connect(mapStateToProps)(FullImage);
+const mapDispatchToProps = dispatch => {
+    return {
+        moveStep: step => {
+            dispatch(moveStep({ step }));
+        }
+    };
+};
+
+const FullImageView = connect(mapStateToProps, mapDispatchToProps)(FullImage);
 
 export default FullImageView;
