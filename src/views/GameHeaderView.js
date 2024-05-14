@@ -14,7 +14,7 @@ const GameHeader = ({ moveStep }) => {
         <header className="game-header">
             <div className="game-title">
                 <p>¡Completa el rompecabezas!</p>
-                <button className="game-button" onClick={() => moveStep('intro')}>
+                <button className="game-button" onTouchEnd={() => moveStep('intro')} onClick={() => moveStep('intro')}>
                     Empieza de nuevo
                 </button>
             </div>
