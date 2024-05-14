@@ -3,12 +3,13 @@ import './Game.css';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { NumImages, GameId_3x3 } from '../constants';
+import { moveStep, initGame } from '../reducers/reducers';
 
-import { moveStep } from '../reducers/reducers';
-
-const Splash = ({ moveStep }) => {
+const Splash = ({ moveStep, onInitGame }) => {
     useEffect(() => {
-        const timeout = setTimeout(() => moveStep('start'), 1000);
+        onInitGame(GameId_3x3);
+        const timeout = setTimeout(() => moveStep('start'), 2000);
         return () => clearTimeout(timeout);
     }, []);
     return (
@@ -23,7 +24,8 @@ const Splash = ({ moveStep }) => {
 };
 
 Splash.propTypes = {
-    moveStep: PropTypes.func
+    moveStep: PropTypes.func,
+    onInitGame: PropTypes.func
 };
 
 const mapStateToProps = () => {
@@ -34,6 +36,9 @@ const mapDispatchToProps = dispatch => {
     return {
         moveStep: step => {
             dispatch(moveStep({ step }));
+        },
+        onInitGame: gameId => {
+            dispatch(initGame({ gameId, imageNumber: Math.floor(Math.random() * NumImages) + 1, doShuffling: true }));
         }
     };
 };

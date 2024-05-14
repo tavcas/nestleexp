@@ -1,25 +1,22 @@
 import './Game.css';
-import Countdown from 'react-countdown';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { moveStep } from '../reducers/reducers';
 
-const GameHeader = ({ moves, moveStep }) => {
-    const [timeout, setTimeout] = useState(60000);
+const GameHeader = ({ moveStep }) => {
+    const [timeout, setTimeout] = useState(90000);
     useEffect(() => {
         const int = setInterval(() => setTimeout(timeout - 1000), 1000);
         return () => clearInterval(int);
     });
-    const renderer = ({ minutes, seconds }) => minutes * 60 + seconds;
     return (
         <header className="game-header">
             <div className="game-title">
-                <h3>
-                    <Countdown key="game-count" renderer={renderer} onComplete={() => moveStep('lose')} controlled={true} date={timeout} />{' '}
-                </h3>
-                <p>Completa el rompecabezas en segundos.</p>
-                <sub>Haz realizado {moves} movimientos.</sub>
+                <p>¡Completa el rompecabezas!</p>
+                <button className="game-button" onClick={() => moveStep('intro')}>
+                    Empieza de nuevo
+                </button>
             </div>
         </header>
     );

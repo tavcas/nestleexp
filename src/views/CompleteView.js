@@ -15,24 +15,21 @@ function randomInRange(min, max) {
 const Complete = ({ moveStep, step }) => {
     useEffect(() => {
         var timeout;
-        step === 'win' &&
-            feti
-                .confetti({
-                    angle: randomInRange(0, 360),
-                    spread: 360,
-                    count: 3000,
-                    origin: { y: 0.6 },
-                    scale: 10
-                })
-                .then(() => {
-                    timeout = setTimeout(() => moveStep('intro'), 5000);
-                });
+        // step === 'win' &&
+        feti.confetti({
+            angle: randomInRange(0, 360),
+            spread: 360,
+            count: 3000,
+            origin: { y: 0.6 },
+            scale: 10
+        });
+        timeout = setTimeout(() => moveStep('intro'), 5000);
         return () => clearTimeout(timeout);
     }, []);
     return (
         <div className="game">
-            <div>
-                <h1 style={{ textTransform: 'uppercase' }}>{step === 'win' ? 'Ganaste!!!!!' : 'Intentalo de nuevo'}</h1>
+            <div className="center">
+                <h1 style={{ fontSize: '5em', textTransform: 'uppercase' }}>{step === 'win' ? '¡Ganaste!' : 'Intentalo de nuevo'}</h1>
             </div>
         </div>
     );

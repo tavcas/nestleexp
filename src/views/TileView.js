@@ -2,7 +2,12 @@ import './Game.css';
 import PropTypes from 'prop-types';
 
 const TileView = ({ id, size, tileWidth, isCorrectPos, imageNumber, onClick }) => (
-    <div className="tile" style={getStyleForTile(id, size, tileWidth, isCorrectPos, imageNumber)} onClick={() => onClick(id)} />
+    <div
+        className={`tile`}
+        style={getStyleForTile(id, size, tileWidth, isCorrectPos, imageNumber)}
+        onTouchStart={() => onClick(id)}
+        onClick={() => onClick(id)}
+    />
 );
 
 TileView.propTypes = {

@@ -12,7 +12,7 @@ const initialState = {
     imageNumber: 1,
     tiles: [],
     size: undefined,
-    gameId: 2,
+    gameId: 0,
     gameName: undefined,
     highScoreList: undefined,
     highScorePosition: -1,
